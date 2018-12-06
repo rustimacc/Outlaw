@@ -1,0 +1,1414 @@
+#include <iostream>
+#include<conio2.h>
+#include<ctime>
+#include<list>
+#include<cstdlib>
+#include<windows.h>
+#include<fstream>
+
+
+
+using namespace std;
+
+///////////////////////////CLASE MADRE COWBOY
+
+class cowboy{
+	
+private:	
+	
+	int vidas;	
+	
+protected:
+	char vaquero[12][10];
+	char vaquero2[12][10];
+	char vaquero3[12][10];
+	
+	int pos_x;
+	int pos_y;
+public:
+	
+		
+	virtual void mostrar(int x,int y,int forma);
+	int vida(){return vidas;};
+	//void set_vida(){vidas=3;};
+	void danio(int life);
+	virtual void movimiento(int dir);//mx y Mx marcan los limites para moverse en pantalla de cada personaje
+	
+	virtual int set_dir(){};
+	virtual int get_dir(){};
+	int set_x(int x){pos_x=x;};
+	int set_y(int y){pos_y=y;};
+	int get_x(){return pos_x;};
+	int get_y(){return pos_y;};
+	
+	
+};
+
+void cowboy::mostrar(int x,int y,int forma){
+	
+		
+}
+
+
+void cowboy::danio(int life){
+	
+vidas=life;
+	
+}
+
+
+
+void cowboy::movimiento(int dir){
+	
+	
+}
+
+/////////////////////////CLASE JUGADOR 
+
+class jugador:virtual public  cowboy{
+	
+private:
+	int color;
+	int forma;
+public:
+	jugador(int _color,int _forma);
+	//int get_x(){return pos_x;};
+	//int get_y(){return pos_y;};
+	void movimiento(int dir);
+	void mostrar(int x,int y,int dibujo);
+};
+
+jugador::jugador(int _color,int _forma){
+	
+		
+	pos_x=rand()%10+5;
+	pos_y=rand()%11+5;
+	
+	//set_vida();
+	color=_color;
+	forma=_forma;
+}
+
+void jugador::movimiento(int dir){
+	
+	switch(dir){
+		
+	case 1://arriba
+		if(pos_y>3){
+			pos_y--;
+		}
+		break;
+	case 2://abajo
+		if(pos_y<17){
+			pos_y++;
+		}
+		break;
+		
+	case 3://derecha
+		if(pos_x>3){
+			pos_x--;
+		}
+		break;
+	case 4://izquierda
+		if(pos_x<15){
+			pos_x++;
+		}
+		break;
+	}
+	
+}
+
+
+
+void jugador::mostrar(int x,int y,int dibujo){
+	textcolor(color);
+	switch(forma){
+		
+		
+	case 1://jugador 1 parado opcion 1
+		vaquero [0][0]=0;vaquero [0][1]=0;vaquero [0][2]=0;vaquero [0][3]=0;vaquero [0][4]=0;vaquero [0][5]=0;vaquero [0][6]=0;vaquero [0][7]=0;vaquero [0][8]=0;vaquero [0][9]=0;
+		vaquero [1][0]=0;vaquero [1][1]=0;vaquero [1][2]=0;vaquero [1][3]=0;vaquero [1][4]=219;vaquero [1][5]=219;vaquero [1][6]=0;vaquero [1][7]=0;vaquero [1][8]=0;vaquero [1][9]=0;
+		vaquero [2][0]=0;vaquero [2][1]=0;vaquero [2][2]=0;vaquero [2][3]=220;vaquero [2][4]=219;vaquero [2][5]=219;vaquero [2][6]=220;vaquero [2][7]=0;vaquero [2][8]=0;vaquero [2][9]=0;
+		vaquero [3][0]=0;vaquero [3][1]=0;vaquero [3][2]=0;vaquero [3][3]=0;vaquero [3][4]=219;vaquero [3][5]=219;vaquero [3][6]=0;vaquero [3][7]=0;vaquero [3][8]=0;vaquero [3][9]=0;
+		vaquero [4][0]=0;vaquero [4][1]=0;vaquero [4][2]=0;vaquero [4][3]=219;vaquero[4][4]=219;vaquero [4][5]=219;vaquero [4][6]=219;vaquero [4][7]=0;vaquero [4][8]=0;vaquero [4][9]=0;
+		vaquero [5][0]=0;vaquero [5][1]=0;vaquero [5][2]=219;vaquero[5][3]=0;vaquero [5][4]=219;vaquero [5][5]=219;vaquero [5][6]=0;vaquero [5][7]=219;vaquero [5][8]=0;vaquero [5][9]=0;
+		vaquero [6][0]=0;vaquero [6][1]=0;vaquero [6][2]=219;vaquero[6][3]=0;vaquero [6][4]=219;vaquero [6][5]=219;vaquero [6][6]=0;vaquero [6][7]=219;vaquero [6][8]=0;vaquero [6][9]=0;
+		vaquero [7][0]=0;vaquero [7][1]=0;vaquero [7][2]=0;vaquero [7][3]=0;vaquero[7][4]=219;vaquero [7][5]=219;vaquero [7][6]=0;vaquero[7][7]=0;vaquero [7][8]=0;vaquero [7][9]=0;
+		vaquero [8][0]=0;vaquero [8][1]=0;vaquero [8][2]=0;vaquero [8][3]=219;vaquero[8][4]=0;vaquero [8][5]=0;vaquero [8][6]=219;vaquero [8][7]=0;vaquero [8][8]=0;vaquero [8][9]=0;
+		vaquero [9][0]=0;vaquero [9][1]=220;vaquero [9][2]=219;vaquero[9][3]=0;vaquero [9][4]=0;vaquero [9][5]=0;vaquero [9][6]=0;vaquero [9][7]=219;vaquero [9][8]=220;vaquero [9][9]=0;
+		vaquero [10][0]=0;vaquero [10][1]=0;vaquero[10][2]=0;vaquero [10][3]=0;vaquero[10][4]=0;vaquero [10][5]=0;vaquero [10][6]=0;vaquero [10][7]=0;vaquero [10][8]=0;vaquero [10][9]=0;
+		vaquero [11][0]=0;vaquero [11][1]=0;vaquero [11][2]=0;vaquero [11][3]=0;vaquero [11][4]=0;vaquero [11][5]=0;vaquero [11][6]=0;vaquero [11][7]=0;vaquero [11][8]=0;vaquero [11][9]=0;
+		//jugador 1 disparando opcion 1
+		vaquero2[0][0]=0;vaquero2[0][1]=0;vaquero2[0][2]=0;vaquero2[0][3]=0;vaquero2[0][4]=0;vaquero2[0][5]=0;vaquero2[0][6]=0;vaquero2[0][7]=0;vaquero2[0][8]=0;vaquero2[0][9]=0;
+		vaquero2[1][0]=0;vaquero2[1][1]=0;vaquero2[1][2]=0;vaquero2[1][3]=0;vaquero2[1][4]=219;vaquero2[1][5]=219;vaquero2[1][6]=0;vaquero2[1][7]=0;vaquero2[1][8]=0;vaquero2[1][9]=0;
+		vaquero2[2][0]=0;vaquero2[2][1]=0;vaquero2[2][2]=0;vaquero2[2][3]=220;vaquero2[2][4]=219;vaquero2[2][5]=219;vaquero2[2][6]=220;vaquero2[2][7]=0;vaquero2[2][8]=0;vaquero2[2][9]=0;
+		vaquero2[3][0]=0;vaquero2[3][1]=0;vaquero2[3][2]=0;vaquero2[3][3]=0;vaquero2[3][4]=219;vaquero2[3][5]=219;vaquero2[3][6]=0;vaquero2[3][7]=220;vaquero2[3][8]=220;vaquero2[3][9]=0;
+		vaquero2[4][0]=0;vaquero2[4][1]=0;vaquero2[4][2]=0;vaquero2[4][3]=0;vaquero2[4][4]=219;vaquero2[4][5]=219;vaquero2[4][6]=219;vaquero2[4][7]=219;vaquero2[4][8]=0;vaquero2[4][9]=0;
+		vaquero2[5][0]=0;vaquero2[5][1]=0;vaquero2[5][2]=0;vaquero2[5][3]=0;vaquero2[5][4]=219;vaquero2[5][5]=219;vaquero2[5][6]=0;vaquero2[5][7]=0;vaquero2[5][8]=0;vaquero2[5][9]=0;
+		vaquero2[6][0]=0;vaquero2[6][1]=0;vaquero2[6][2]=0;vaquero2[6][3]=0;vaquero2[6][4]=219;vaquero2[6][5]=219;vaquero2[6][6]=0;vaquero2[6][7]=0;vaquero2[6][8]=0;vaquero2[6][9]=0;
+		vaquero2[7][0]=0;vaquero2[7][1]=0;vaquero2[7][2]=0;vaquero2[7][3]=0;vaquero2[7][4]=219;vaquero2[7][5]=219;vaquero2[7][6]=219;vaquero2[7][7]=219;vaquero2[7][8]=0;vaquero2[7][9]=0;
+		vaquero2[8][0]=0;vaquero2[8][1]=0;vaquero2[8][2]=0;vaquero2[8][3]=0;vaquero2[8][4]=0;vaquero2[8][5]=219;vaquero2[8][6]=0;vaquero2[8][7]=219;vaquero2[8][8]=0;vaquero2[8][9]=0;
+		vaquero2[9][0]=0;vaquero2[9][1]=0;vaquero2[9][2]=0;vaquero2[9][3]=219;vaquero2[9][4]=219;vaquero2[9][5]=219;vaquero2[9][6]=0;vaquero2[9][7]=219;vaquero2[9][8]=219;vaquero2[9][9]=0;
+		vaquero2[10][0]=0;vaquero2[10][1]=0;vaquero2[10][2]=0;vaquero2[10][3]=0;vaquero2[10][4]=0;vaquero2[10][5]=0;vaquero2[10][6]=0;vaquero2[10][7]=0;vaquero2[10][8]=0;vaquero2[10][9]=0;
+		vaquero2[11][0]=0;vaquero2[11][1]=0;vaquero2[11][2]=0;vaquero2[11][3]=0;vaquero2[11][4]=0;vaquero2[11][5]=0;vaquero2[11][6]=0;vaquero2[11][7]=0;vaquero2[11][8]=0;vaquero2[11][9]=0;
+		//jugador 1 da�ado opcion 1
+		vaquero3[0][0]=0;vaquero3[0][1]=0;vaquero3[0][2]=0;vaquero3[0][3]=0;vaquero3[0][4]=0;vaquero3[0][5]=0;vaquero3[0][6]=0;vaquero3[0][7]=0;vaquero3[0][8]=0;vaquero3[0][9]=0;
+		vaquero3[1][0]=0;vaquero3[1][1]=0;vaquero3[1][2]=0;vaquero3[1][3]=0;vaquero3[1][4]=0;vaquero3[1][5]=0;vaquero3[1][6]=0;vaquero3[1][7]=0;vaquero3[1][8]=0;vaquero3[1][9]=0;
+		vaquero3[2][0]=0;vaquero3[2][1]=0;vaquero3[2][2]=0;vaquero3[2][3]=219;vaquero3[2][4]=219;vaquero3[2][5]=0;vaquero3[2][6]=0;vaquero3[2][7]=0;vaquero3[2][8]=0;vaquero3[2][9]=0;
+		vaquero3[3][0]=0;vaquero3[3][1]=0;vaquero3[3][2]=219;vaquero3[3][3]=219;vaquero3[3][4]=219;vaquero3[3][5]=219;vaquero3[3][6]=219;vaquero3[3][7]=0;vaquero3[3][8]=0;vaquero3[3][9]=0;
+		vaquero3[4][0]=0;vaquero3[4][1]=0;vaquero3[4][2]=0;vaquero3[4][3]=219;vaquero3[4][4]=219;vaquero3[4][5]=219;vaquero3[4][6]=0;vaquero3[4][7]=0;vaquero3[4][8]=0;vaquero3[4][9]=0;
+		vaquero3[5][0]=0;vaquero3[5][1]=0;vaquero3[5][2]=0;vaquero3[5][3]=219;vaquero3[5][4]=219;vaquero3[5][5]=0;vaquero3[5][6]=0;vaquero3[5][7]=0;vaquero3[5][8]=0;vaquero3[5][9]=0;
+		vaquero3[6][0]=0;vaquero3[6][1]=0;vaquero3[6][2]=0;vaquero3[6][3]=219;vaquero3[6][4]=219;vaquero3[6][5]=0;vaquero3[6][6]=0;vaquero3[6][7]=0;vaquero3[6][8]=0;vaquero3[6][9]=0;
+		vaquero3[7][0]=0;vaquero3[7][1]=0;vaquero3[7][2]=0;vaquero3[7][3]=219;vaquero3[7][4]=219;vaquero3[7][5]=219;vaquero3[7][6]=219;vaquero3[7][7]=0;vaquero3[7][8]=0;vaquero3[7][9]=0;
+		vaquero3[8][0]=0;vaquero3[8][1]=0;vaquero3[8][2]=0;vaquero3[8][3]=219;vaquero3[8][4]=219;vaquero3[8][5]=0;vaquero3[8][6]=0;vaquero3[8][7]=0;vaquero3[8][8]=0;vaquero3[8][9]=0;
+		vaquero3[9][0]=0;vaquero3[9][1]=0;vaquero3[9][2]=0;vaquero3[9][3]=219;vaquero3[9][4]=219;vaquero3[9][5]=0;vaquero3[9][6]=0;vaquero3[9][7]=0;vaquero3[9][8]=219;vaquero3[9][9]=0;
+		vaquero3[10][0]=0;vaquero3[10][1]=0;vaquero3[10][2]=0;vaquero3[10][3]=219;vaquero3[10][4]=219;vaquero3[10][5]=219;vaquero3[10][6]=219;vaquero3[10][7]=219;vaquero3[10][8]=219;vaquero3[10][9]=0;
+		vaquero3[11][0]=0;vaquero3[11][1]=0;vaquero3[11][2]=0;vaquero3[11][3]=0;vaquero3[11][4]=0;vaquero3[11][5]=0;vaquero3[11][6]=0;vaquero3[11][7]=0;vaquero3[11][8]=0;vaquero3[11][9]=0;
+		
+		break;
+		
+	case 2://opcion  2 jugador
+		vaquero[0][0]=0;vaquero[0][1]=0;vaquero[0][2]=0;vaquero[0][3]=0;vaquero[0][4]=0;vaquero[0][5]=0;vaquero[0][6]=0;vaquero[0][7]=0;vaquero[0][8]=0;vaquero[0][9]=0;
+		vaquero[1][0]=0;vaquero[1][1]=0;vaquero[1][2]=0;vaquero[1][3]=219;vaquero[1][4]=219;vaquero[1][5]=0;vaquero[1][6]=0;vaquero[1][7]=0;vaquero[1][8]=0;vaquero[1][9]=0;
+		vaquero[2][0]=0;vaquero[2][1]=0;vaquero[2][2]=219;vaquero[2][3]=219;vaquero[2][4]=219;vaquero[2][5]=219;vaquero[2][6]=219;vaquero[2][7]=0;vaquero[2][8]=0;vaquero[2][9]=0;
+		vaquero[3][0]=0;vaquero[3][1]=0;vaquero[3][2]=0;vaquero[3][3]=219;vaquero[3][4]=219;vaquero[3][5]=219;vaquero[3][6]=0;vaquero[3][7]=0;vaquero[3][8]=0;vaquero[3][9]=0;
+		vaquero[4][0]=0;vaquero[4][1]=0;vaquero[4][2]=0;vaquero[4][3]=219;vaquero[4][4]=219;vaquero[4][5]=0;vaquero[4][6]=0;vaquero[4][7]=0;vaquero[4][8]=0;vaquero[4][9]=0;
+		vaquero[5][0]=0;vaquero[5][1]=0;vaquero[5][2]=219;vaquero[5][3]=219;vaquero[5][4]=219;vaquero[5][5]=219;vaquero[5][6]=0;vaquero[5][7]=0;vaquero[5][8]=0;vaquero[5][9]=0;
+		vaquero[6][0]=0;vaquero[6][1]=219;vaquero[6][2]=0;vaquero[6][3]=219;vaquero[6][4]=219;vaquero[6][5]=0;vaquero[6][6]=219;vaquero[6][7]=0;vaquero[6][8]=0;vaquero[6][9]=0;
+		vaquero[7][0]=0;vaquero[7][1]=0;vaquero[7][2]=0;vaquero[7][3]=219;vaquero[7][4]=219;vaquero[7][5]=0;vaquero[7][6]=0;vaquero[7][7]=0;vaquero[7][8]=0;vaquero[7][9]=0;
+		vaquero[8][0]=0;vaquero[8][1]=219;vaquero[8][2]=219;vaquero[8][3]=219;vaquero[8][4]=219;vaquero[8][5]=0;vaquero[8][6]=0;vaquero[8][7]=0;vaquero[8][8]=0;vaquero[8][9]=0;
+		vaquero[9][0]=0;vaquero[9][1]=219;vaquero[9][2]=0;vaquero[9][3]=0;vaquero[9][4]=219;vaquero[9][5]=0;vaquero[9][6]=0;vaquero[9][7]=0;vaquero[9][8]=0;vaquero[9][9]=0;
+		vaquero[10][0]=0;vaquero[10][1]=0;vaquero[10][2]=0;vaquero[10][3]=0;vaquero[10][4]=219;vaquero[10][5]=219;vaquero[10][6]=0;vaquero[10][7]=0;vaquero[10][8]=0;vaquero[10][9]=0;
+		vaquero[11][0]=0;vaquero[11][1]=0;vaquero[11][2]=0;vaquero[11][3]=0;vaquero[11][4]=0;vaquero[11][5]=0;vaquero[11][6]=0;vaquero[11][7]=0;vaquero[11][8]=0;vaquero[11][9]=0;
+		
+		vaquero2[0][0]=0;vaquero2[0][1]=0;vaquero2[0][2]=0;vaquero2[0][3]=0;vaquero2[0][4]=0;vaquero2[0][5]=0;vaquero2[0][6]=0;vaquero2[0][7]=0;vaquero2[0][8]=0;vaquero2[0][9]=0;
+		vaquero2[1][0]=0;vaquero2[1][1]=0;vaquero2[1][2]=0;vaquero2[1][3]=219;vaquero2[1][4]=219;vaquero2[1][5]=0;vaquero2[1][6]=0;vaquero2[1][7]=0;vaquero2[1][8]=0;vaquero2[1][9]=0;
+		vaquero2[2][0]=0;vaquero2[2][1]=0;vaquero2[2][2]=219;vaquero2[2][3]=219;vaquero2[2][4]=219;vaquero2[2][5]=219;vaquero2[2][6]=219;vaquero2[2][7]=0;vaquero2[2][8]=0;vaquero2[2][9]=0;
+		vaquero2[3][0]=0;vaquero2[3][1]=0;vaquero2[3][2]=0;vaquero2[3][3]=219;vaquero2[3][4]=219;vaquero2[3][5]=219;vaquero2[3][6]=0;vaquero2[3][7]=0;vaquero2[3][8]=0;vaquero2[3][9]=0;
+		vaquero2[4][0]=0;vaquero2[4][1]=0;vaquero2[4][2]=0;vaquero2[4][3]=219;vaquero2[4][4]=219;vaquero2[4][5]=0;vaquero2[4][6]=0;vaquero2[4][7]=220;vaquero2[4][8]=220;vaquero2[4][9]=0;
+		vaquero2[5][0]=0;vaquero2[5][1]=0;vaquero2[5][2]=0;vaquero2[5][3]=219;vaquero2[5][4]=219;vaquero2[5][5]=219;vaquero2[5][6]=219;vaquero2[5][7]=219;vaquero2[5][8]=0;vaquero2[5][9]=0;
+		vaquero2[6][0]=0;vaquero2[6][1]=0;vaquero2[6][2]=0;vaquero2[6][3]=219;vaquero2[6][4]=219;vaquero2[6][5]=0;vaquero2[6][6]=0;vaquero2[6][7]=0;vaquero2[6][8]=0;vaquero2[6][9]=0;
+		vaquero2[7][0]=0;vaquero2[7][1]=0;vaquero2[7][2]=0;vaquero2[7][3]=219;vaquero2[7][4]=219;vaquero2[7][5]=0;vaquero2[7][6]=0;vaquero2[7][7]=0;vaquero2[7][8]=0;vaquero2[7][9]=0;
+		vaquero2[8][0]=0;vaquero2[8][1]=0;vaquero2[8][2]=0;vaquero2[8][3]=219;vaquero2[8][4]=219;vaquero2[8][5]=0;vaquero2[8][6]=0;vaquero2[8][7]=0;vaquero2[8][8]=0;vaquero2[8][9]=0;
+		vaquero2[9][0]=0;vaquero2[9][1]=0;vaquero2[9][2]=0;vaquero2[9][3]=219;vaquero2[9][4]=219;vaquero2[9][5]=0;vaquero2[9][6]=0;vaquero2[9][7]=0;vaquero2[9][8]=0;vaquero2[9][9]=0;
+		vaquero2[10][0]=0;vaquero2[10][1]=0;vaquero2[10][2]=0;vaquero2[10][3]=219;vaquero2[10][4]=219;vaquero2[10][5]=219;vaquero2[10][6]=0;vaquero2[10][7]=0;vaquero2[10][8]=0;vaquero2[10][9]=0;
+		vaquero2[11][0]=0;vaquero2[11][1]=0;vaquero2[11][2]=0;vaquero2[11][3]=0;vaquero2[11][4]=0;vaquero2[11][5]=0;vaquero2[11][6]=0;vaquero2[11][7]=0;vaquero2[11][8]=0;vaquero2[11][9]=0;
+		
+		vaquero3[0][0]=0;vaquero3[0][1]=0;vaquero3[0][2]=0;vaquero3[0][3]=0;vaquero3[0][4]=0;vaquero3[0][5]=0;vaquero3[0][6]=0;vaquero3[0][7]=0;vaquero3[0][8]=0;vaquero3[0][9]=0;
+		vaquero3[1][0]=0;vaquero3[1][1]=0;vaquero3[1][2]=0;vaquero3[1][3]=0;vaquero3[1][4]=0;vaquero3[1][5]=0;vaquero3[1][6]=0;vaquero3[1][7]=0;vaquero3[1][8]=0;vaquero3[1][9]=0;
+		vaquero3[2][0]=0;vaquero3[2][1]=0;vaquero3[2][2]=0;vaquero3[2][3]=0;vaquero3[2][4]=0;vaquero3[2][5]=219;vaquero3[2][6]=219;vaquero3[2][7]=0;vaquero3[2][8]=0;vaquero3[2][9]=0;
+		vaquero3[3][0]=0;vaquero3[3][1]=0;vaquero3[3][2]=0;vaquero3[3][3]=0;vaquero3[3][4]=219;vaquero3[3][5]=219;vaquero3[3][6]=219;vaquero3[3][7]=219;vaquero3[3][8]=219;vaquero3[3][9]=0;
+		vaquero3[4][0]=0;vaquero3[4][1]=0;vaquero3[4][2]=0;vaquero3[4][3]=0;vaquero3[4][4]=0;vaquero3[4][5]=219;vaquero3[4][6]=219;vaquero3[4][7]=219;vaquero3[4][8]=0;vaquero3[4][9]=0;
+		vaquero3[5][0]=0;vaquero3[5][1]=0;vaquero3[5][2]=0;vaquero3[5][3]=219;vaquero3[5][4]=0;vaquero3[5][5]=219;vaquero3[5][6]=219;vaquero3[5][7]=0;vaquero3[5][8]=219;vaquero3[5][9]=0;
+		vaquero3[6][0]=0;vaquero3[6][1]=0;vaquero3[6][2]=0;vaquero3[6][3]=219;vaquero3[6][4]=219;vaquero3[6][5]=219;vaquero3[6][6]=219;vaquero3[6][7]=219;vaquero3[6][8]=219;vaquero3[6][9]=0;
+		vaquero3[7][0]=0;vaquero3[7][1]=0;vaquero3[7][2]=0;vaquero3[7][3]=0;vaquero3[7][4]=0;vaquero3[7][5]=219;vaquero3[7][6]=219;vaquero3[7][7]=0;vaquero3[7][8]=0;vaquero3[7][9]=0;
+		vaquero3[8][0]=0;vaquero3[8][1]=0;vaquero3[8][2]=0;vaquero3[8][3]=0;vaquero3[8][4]=0;vaquero3[8][5]=219;vaquero3[8][6]=219;vaquero3[8][7]=0;vaquero3[8][8]=0;vaquero3[8][9]=0;
+		vaquero3[9][0]=0;vaquero3[9][1]=220;vaquero3[9][2]=220;vaquero3[9][3]=0;vaquero3[9][4]=0;vaquero3[9][5]=219;vaquero3[9][6]=219;vaquero3[9][7]=0;vaquero3[9][8]=0;vaquero3[9][9]=0;
+		vaquero3[10][0]=0;vaquero3[10][1]=219;vaquero3[10][2]=0;vaquero3[10][3]=223;vaquero3[10][4]=220;vaquero3[10][5]=219;vaquero3[10][6]=219;vaquero3[10][7]=0;vaquero3[10][8]=0;vaquero3[10][9]=0;
+		vaquero3[11][0]=0;vaquero3[11][1]=0;vaquero3[11][2]=0;vaquero3[11][3]=0;vaquero3[11][4]=0;vaquero3[11][5]=0;vaquero3[11][6]=0;vaquero3[11][7]=0;vaquero3[11][8]=0;vaquero3[11][9]=0;
+		
+		break;
+	}
+	switch(dibujo){
+		
+		
+	case 1:
+		for(int j=0;j<12;j++){
+			for(int i=0;i<10;i++){
+				gotoxy(x+i,y+j);
+				cout<<vaquero[j][i];
+			}
+			cout<<endl;
+		}
+		break;
+	case 2:
+		for(int j=0;j<11;j++){
+			for(int i=0;i<10;i++){
+				gotoxy(x+i,y+j);
+				cout<<vaquero2[j][i];
+			}
+			cout<<endl;
+		}
+		break;
+	case 3:
+		for(int j=0;j<12;j++){
+			for(int i=0;i<10;i++){
+				gotoxy(x+i,y+j);
+				cout<<vaquero3[j][i];
+			}
+			cout<<endl;
+		}
+		break;
+	}
+	
+	
+	textcolor(1);
+	
+}
+
+
+///////////////////////////CLASE NPC
+
+class npc: public cowboy{
+	
+private:
+	
+	int dire;
+	int color;
+	int forma;
+public:
+	npc(int direccion,int _color,int _forma);
+	//int set_dir(){return dir=rand()%5+1;};
+	//int get_dir(){return dir;};
+	
+	void movimiento(int dir);
+	void mostrar(int x,int y,int dibujo);
+	
+	bool colision_bala(class bala &balita);
+	
+};
+
+npc::npc(int direccion,int _color,int _forma){
+	
+	set_x(60);
+	set_y(rand()%11+5);
+		
+	//dir=1;
+	//set_vida();
+	color=_color;
+	forma=_forma;
+}
+
+
+
+void npc::movimiento(int dir){
+	
+	switch(dir){
+		
+	case 1://arriba
+		if(pos_y>3){
+			pos_y--;
+		}
+		break;
+	case 2://abajo
+		if(pos_y<17){
+			pos_y++;
+		}
+		break;
+		
+	case 3://derecha
+		if(pos_x>60){
+			pos_x--;
+		}
+		break;
+	case 4://izquierda
+		if(pos_x<69){
+			pos_x++;
+		}
+		break;
+	}
+	if(get_x()<=50){
+		dir=3;
+	}
+	if(get_x()>=69){
+		dir=1;
+	}
+	if(get_y()<=3){
+		if(dir==1){
+			dir=4;
+		}
+		else{
+			dir=2;
+		}
+	}
+	if(get_y()>=17){
+		dir=1;
+	}
+	
+	
+	
+}
+
+void npc::mostrar(int x,int y,int dibujo){
+	textcolor(color);
+	
+	x=pos_x;
+	y=pos_y;
+	switch(forma){
+	
+case 1://opcion 1 dibujo npc 
+	vaquero[0][0]=0;vaquero[0][1]=0;vaquero[0][2]=0;vaquero[0][3]=0;vaquero[0][4]=0;vaquero[0][5]=0;vaquero[0][6]=0;vaquero[0][7]=0;vaquero[0][8]=0;vaquero[0][9]=0;
+	vaquero[1][0]=0;vaquero[1][1]=0;vaquero[1][2]=0;vaquero[1][3]=0;vaquero[1][4]=0;vaquero[1][5]=0;vaquero[1][6]=0;vaquero[1][7]=0;vaquero[1][8]=0;vaquero[1][9]=0;
+	vaquero[2][0]=0;vaquero[2][1]=0;vaquero[2][2]=0;vaquero[2][3]=0;vaquero[2][4]=0;vaquero[2][5]=219;vaquero[2][6]=219;vaquero[2][7]=0;vaquero[2][8]=0;vaquero[2][9]=0;
+	vaquero[3][0]=0;vaquero[3][1]=0;vaquero[3][2]=0;vaquero[3][3]=0;vaquero[3][4]=220;vaquero[3][5]=219;vaquero[3][6]=219;vaquero[3][7]=220;vaquero[3][8]=0;vaquero[3][9]=0;
+	vaquero[4][0]=0;vaquero[4][1]=0;vaquero[4][2]=0;vaquero[4][3]=0;vaquero[4][4]=0;vaquero[4][5]=219;vaquero[4][6]=219;vaquero[4][7]=0;vaquero[4][8]=0;vaquero[4][9]=0;
+	vaquero[5][0]=0;vaquero[5][1]=0;vaquero[5][2]=0;vaquero[5][3]=0;vaquero[5][4]=219;vaquero[5][5]=219;vaquero[5][6]=219;vaquero[5][7]=219;vaquero[5][8]=0;vaquero[5][9]=0;
+	vaquero[6][0]=0;vaquero[6][1]=0;vaquero[6][2]=0;vaquero[6][3]=219;vaquero[6][4]=0;vaquero[6][5]=219;vaquero[6][6]=219;vaquero[6][7]=0;vaquero[6][8]=219;vaquero[6][9]=0;
+	vaquero[7][0]=0;vaquero[7][1]=0;vaquero[7][2]=0;vaquero[7][3]=219;vaquero[7][4]=0;vaquero[7][5]=219;vaquero[7][6]=219;vaquero[7][7]=0;vaquero[7][8]=219;vaquero[7][9]=0;
+	vaquero[8][0]=0;vaquero[8][1]=0;vaquero[8][2]=0;vaquero[8][3]=0;vaquero[8][4]=219;vaquero[8][5]=0;vaquero[8][6]=0;vaquero[8][7]=219;vaquero[8][8]=0;vaquero[8][9]=0;
+	vaquero[9][0]=0;vaquero[9][1]=0;vaquero[9][2]=0;vaquero[9][3]=0;vaquero[9][4]=219;vaquero[9][5]=0;vaquero[9][6]=0;vaquero[9][7]=219;vaquero[9][8]=0;vaquero[9][9]=0;
+	vaquero[10][0]=0;vaquero[10][1]=0;vaquero[10][2]=0;vaquero[10][3]=219;vaquero[10][4]=219;vaquero[10][5]=0;vaquero[10][6]=0;vaquero[10][7]=219;vaquero[10][8]=219;vaquero[10][9]=0;
+	vaquero[11][0]=0;vaquero[11][1]=0;vaquero[11][2]=0;vaquero[11][3]=0;vaquero[11][4]=0;vaquero[11][5]=0;vaquero[11][6]=0;vaquero[11][7]=0;vaquero[11][8]=0;vaquero[11][9]=0;
+	// npc disparando opcion 1
+	vaquero2[0][0]=0;vaquero2[0][1]=0;vaquero2[0][2]=0;vaquero2[0][3]=0;vaquero2[0][4]=0;vaquero2[0][5]=0;vaquero2[0][6]=0;vaquero2[0][7]=0;vaquero2[0][8]=0;vaquero2[0][9]=0;
+	vaquero2[1][0]=0;vaquero2[1][1]=0;vaquero2[1][2]=0;vaquero2[1][3]=0;vaquero2[1][4]=0;vaquero2[1][5]=0;vaquero2[1][6]=0;vaquero2[1][7]=0;vaquero2[1][8]=0;vaquero2[1][9]=0;
+	vaquero2[2][0]=0;vaquero2[2][1]=0;vaquero2[2][2]=0;vaquero2[2][3]=0;vaquero2[2][4]=0;vaquero2[2][5]=219;vaquero2[2][6]=219;vaquero2[2][7]=0;vaquero2[2][8]=0;vaquero2[2][9]=0;
+	vaquero2[3][0]=0;vaquero2[3][1]=0;vaquero2[3][2]=0;vaquero2[3][3]=0;vaquero2[3][4]=220;vaquero2[3][5]=219;vaquero2[3][6]=219;vaquero2[3][7]=220;vaquero2[3][8]=0;vaquero2[3][9]=0;
+	vaquero2[4][0]=0;vaquero2[4][1]=220;vaquero2[4][2]=220;vaquero2[4][3]=0;vaquero2[4][4]=0;vaquero2[4][5]=219;vaquero2[4][6]=219;vaquero2[4][7]=0;vaquero2[4][8]=0;vaquero2[4][9]=0;
+	vaquero2[5][0]=0;vaquero2[5][1]=0;vaquero2[5][2]=223;vaquero2[5][3]=223;vaquero2[5][4]=223;vaquero2[5][5]=219;vaquero2[5][6]=219;vaquero2[5][7]=219;vaquero2[5][8]=0;vaquero2[5][9]=0;
+	vaquero2[6][0]=0;vaquero2[6][1]=0;vaquero2[6][2]=0;vaquero2[6][3]=0;vaquero2[6][4]=0;vaquero2[6][5]=219;vaquero2[6][6]=219;vaquero2[6][7]=0;vaquero2[6][8]=219;vaquero2[6][9]=0;
+	vaquero2[7][0]=0;vaquero2[7][1]=0;vaquero2[7][2]=0;vaquero2[7][3]=0;vaquero2[7][4]=0;vaquero2[7][5]=219;vaquero2[7][6]=219;vaquero2[7][7]=0;vaquero2[7][8]=219;vaquero2[7][9]=0;
+	vaquero2[8][0]=0;vaquero2[8][1]=0;vaquero2[8][2]=0;vaquero2[8][3]=0;vaquero2[8][4]=219;vaquero2[8][5]=0;vaquero2[8][6]=0;vaquero2[8][7]=219;vaquero2[8][8]=0;vaquero2[8][9]=0;
+	vaquero2[9][0]=0;vaquero2[9][1]=0;vaquero2[9][2]=0;vaquero2[9][3]=0;vaquero2[9][4]=219;vaquero2[9][5]=0;vaquero2[9][6]=0;vaquero2[9][7]=219;vaquero2[9][8]=0;vaquero2[9][9]=0;
+	vaquero2[10][0]=0;vaquero2[10][1]=0;vaquero2[10][2]=0;vaquero2[10][3]=219;vaquero2[10][4]=219;vaquero2[10][5]=0;vaquero2[10][6]=0;vaquero2[10][7]=219;vaquero2[10][8]=219;vaquero2[10][9]=0;
+	vaquero2[11][0]=0;vaquero2[11][1]=0;vaquero2[11][2]=0;vaquero2[11][3]=0;vaquero2[11][4]=0;vaquero2[11][5]=0;vaquero2[11][6]=0;vaquero2[11][7]=0;vaquero2[11][8]=0;vaquero2[11][9]=0;
+	
+	// npc da�ado opcion 1
+	vaquero3[0][0]=0;vaquero3[0][1]=0;vaquero3[0][2]=0;vaquero3[0][3]=0;vaquero3[0][4]=0;vaquero3[0][5]=0;vaquero3[0][6]=0;vaquero3[0][7]=0;vaquero3[0][8]=0;vaquero3[0][9]=0;
+	vaquero3[1][0]=0;vaquero3[1][1]=0;vaquero3[1][2]=0;vaquero3[1][3]=0;vaquero3[1][4]=0;vaquero3[1][5]=0;vaquero3[1][6]=0;vaquero3[1][7]=0;vaquero3[1][8]=0;vaquero3[1][9]=0;
+	vaquero3[2][0]=0;vaquero3[2][1]=0;vaquero3[2][2]=0;vaquero3[2][3]=0;vaquero3[2][4]=0;vaquero3[2][5]=0;vaquero3[2][6]=0;vaquero3[2][7]=0;vaquero3[2][8]=0;vaquero3[2][9]=0;
+	vaquero3[3][0]=0;vaquero3[3][1]=0;vaquero3[3][2]=0;vaquero3[3][3]=0;vaquero3[3][4]=0;vaquero3[3][5]=0;vaquero3[3][6]=0;vaquero3[3][7]=0;vaquero3[3][8]=0;vaquero3[3][9]=0;
+	vaquero3[4][0]=0;vaquero3[4][1]=0;vaquero3[4][2]=0;vaquero3[4][3]=0;vaquero3[4][4]=219;vaquero3[4][5]=219;vaquero3[4][6]=0;vaquero3[4][7]=0;vaquero3[4][8]=0;vaquero3[4][9]=0;
+	vaquero3[5][0]=0;vaquero3[5][1]=0;vaquero3[5][2]=0;vaquero3[5][3]=220;vaquero3[5][4]=219;vaquero3[5][5]=219;vaquero3[5][6]=220;vaquero3[5][7]=0;vaquero3[5][8]=0;vaquero3[5][9]=0;
+	vaquero3[6][0]=0;vaquero3[6][1]=0;vaquero3[6][2]=219;vaquero3[6][3]=0;vaquero3[6][4]=219;vaquero3[6][5]=219;vaquero3[6][6]=0;vaquero3[6][7]=219;vaquero3[6][8]=0;vaquero3[6][9]=0;
+	vaquero3[7][0]=0;vaquero3[7][1]=0;vaquero3[7][2]=223;vaquero3[7][3]=223;vaquero3[7][4]=219;vaquero3[7][5]=219;vaquero3[7][6]=223;vaquero3[7][7]=223;vaquero3[7][8]=0;vaquero3[7][9]=0;
+	vaquero3[8][0]=0;vaquero3[8][1]=0;vaquero3[8][2]=0;vaquero3[8][3]=0;vaquero3[8][4]=219;vaquero3[8][5]=219;vaquero3[8][6]=0;vaquero3[8][7]=0;vaquero3[8][8]=0;vaquero3[8][9]=0;
+	vaquero3[9][0]=0;vaquero3[9][1]=219;vaquero3[9][2]=0;vaquero3[9][3]=0;vaquero3[9][4]=219;vaquero3[9][5]=219;vaquero3[9][6]=0;vaquero3[9][7]=0;vaquero3[9][8]=219;vaquero3[9][9]=0;
+	vaquero3[10][0]=0;vaquero3[10][1]=219;vaquero3[10][2]=219;vaquero3[10][3]=219;vaquero3[10][4]=219;vaquero3[10][5]=219;vaquero3[10][6]=219;vaquero3[10][7]=219;vaquero3[10][8]=219;vaquero3[10][9]=0;
+	vaquero3[11][0]=0;vaquero3[11][1]=0;vaquero3[11][2]=0;vaquero3[11][3]=0;vaquero3[11][4]=0;vaquero3[11][5]=0;vaquero3[11][6]=0;vaquero3[11][7]=0;vaquero3[11][8]=0;vaquero3[11][9]=0;
+	
+	break;
+	
+case 2://vaquero forma 2 npc
+	vaquero[0][0]=0;vaquero[0][1]=0;vaquero[0][2]=0;vaquero[0][3]=0;vaquero[0][4]=0;vaquero[0][5]=0;vaquero[0][6]=0;vaquero[0][7]=0;vaquero[0][8]=0;vaquero[0][9]=0;
+	vaquero[1][0]=0;vaquero[1][1]=0;vaquero[1][2]=0;vaquero[1][3]=0;vaquero[1][4]=219;vaquero[1][5]=219;vaquero[1][6]=0;vaquero[1][7]=0;vaquero[1][8]=0;vaquero[1][9]=0;
+	vaquero[2][0]=0;vaquero[2][1]=0;vaquero[2][2]=0;vaquero[2][3]=219;vaquero[2][4]=219;vaquero[2][5]=219;vaquero[2][6]=219;vaquero[2][7]=0;vaquero[2][8]=0;vaquero[2][9]=0;
+	vaquero[3][0]=0;vaquero[3][1]=0;vaquero[3][2]=0;vaquero[3][3]=0;vaquero[3][4]=219;vaquero[3][5]=219;vaquero[3][6]=0;vaquero[3][7]=0;vaquero[3][8]=0;vaquero[3][9]=0;
+	vaquero[4][0]=0;vaquero[4][1]=0;vaquero[4][2]=219;vaquero[4][3]=219;vaquero[4][4]=219;vaquero[4][5]=219;vaquero[4][6]=219;vaquero[4][7]=219;vaquero[4][8]=0;vaquero[4][9]=0;
+	vaquero[5][0]=0;vaquero[5][1]=219;vaquero[5][2]=0;vaquero[5][3]=0;vaquero[5][4]=219;vaquero[5][5]=219;vaquero[5][6]=0;vaquero[5][7]=0;vaquero[5][8]=219;vaquero[5][9]=0;
+	vaquero[6][0]=0;vaquero[6][1]=219;vaquero[6][2]=0;vaquero[6][3]=0;vaquero[6][4]=219;vaquero[6][5]=219;vaquero[6][6]=0;vaquero[6][7]=0;vaquero[6][8]=219;vaquero[6][9]=0;
+	vaquero[7][0]=0;vaquero[7][1]=0;vaquero[7][2]=219;vaquero[7][3]=0;vaquero[7][4]=219;vaquero[7][5]=219;vaquero[7][6]=0;vaquero[7][7]=219;vaquero[7][8]=0;vaquero[7][9]=0;
+	vaquero[8][0]=0;vaquero[8][1]=0;vaquero[8][2]=0;vaquero[8][3]=219;vaquero[8][4]=219;vaquero[8][5]=219;vaquero[8][6]=219;vaquero[8][7]=0;vaquero[8][8]=0;vaquero[8][9]=0;
+	vaquero[9][0]=0;vaquero[9][1]=0;vaquero[9][2]=0;vaquero[9][3]=219;vaquero[9][4]=0;vaquero[9][5]=0;vaquero[9][6]=219;vaquero[9][7]=0;vaquero[9][8]=0;vaquero[9][9]=0;
+	vaquero[10][0]=0;vaquero[10][1]=0;vaquero[10][2]=219;vaquero[10][3]=219;vaquero[10][4]=0;vaquero[10][5]=219;vaquero[10][6]=219;vaquero[10][7]=0;vaquero[10][8]=0;vaquero[10][9]=0;
+	vaquero[11][0]=0;vaquero[11][1]=0;vaquero[11][2]=0;vaquero[11][3]=0;vaquero[11][4]=0;vaquero[11][5]=0;vaquero[11][6]=0;vaquero[11][7]=0;vaquero[11][8]=0;vaquero[11][9]=0;
+	
+	vaquero2[0][0]=0;vaquero2[0][1]=0;vaquero2[0][2]=0;vaquero2[0][3]=0;vaquero2[0][4]=0;vaquero2[0][5]=0;vaquero2[0][6]=0;vaquero2[0][7]=0;vaquero2[0][8]=0;vaquero2[0][9]=0;
+	vaquero2[1][0]=0;vaquero2[1][1]=0;vaquero2[1][2]=0;vaquero2[1][3]=0;vaquero2[1][4]=0;vaquero2[1][5]=0;vaquero2[1][6]=219;vaquero2[1][7]=219;vaquero2[1][8]=0;vaquero2[1][9]=0;
+	vaquero2[2][0]=0;vaquero2[2][1]=0;vaquero2[2][2]=0;vaquero2[2][3]=0;vaquero2[2][4]=0;vaquero2[2][5]=219;vaquero2[2][6]=219;vaquero2[2][7]=219;vaquero2[2][8]=219;vaquero2[2][9]=0;
+	vaquero2[3][0]=0;vaquero2[3][1]=0;vaquero2[3][2]=0;vaquero2[3][3]=0;vaquero2[3][4]=0;vaquero2[3][5]=0;vaquero2[3][6]=219;vaquero2[3][7]=219;vaquero2[3][8]=0;vaquero2[3][9]=0;
+	vaquero2[4][0]=0;vaquero2[4][1]=219;vaquero2[4][2]=219;vaquero2[4][3]=219;vaquero2[4][4]=219;vaquero2[4][5]=219;vaquero2[4][6]=219;vaquero2[4][7]=219;vaquero2[4][8]=219;vaquero2[4][9]=0;
+	vaquero2[5][0]=0;vaquero2[5][1]=0;vaquero2[5][2]=0;vaquero2[5][3]=0;vaquero2[5][4]=219;vaquero2[5][5]=220;vaquero2[5][6]=219;vaquero2[5][7]=219;vaquero2[5][8]=0;vaquero2[5][9]=0;
+	vaquero2[6][0]=0;vaquero2[6][1]=0;vaquero2[6][2]=0;vaquero2[6][3]=0;vaquero2[6][4]=0;vaquero2[6][5]=0;vaquero2[6][6]=219;vaquero2[6][7]=219;vaquero2[6][8]=0;vaquero2[6][9]=0;
+	vaquero2[7][0]=0;vaquero2[7][1]=0;vaquero2[7][2]=0;vaquero2[7][3]=0;vaquero2[7][4]=0;vaquero2[7][5]=0;vaquero2[7][6]=219;vaquero2[7][7]=219;vaquero2[7][8]=0;vaquero2[7][9]=0;
+	vaquero2[8][0]=0;vaquero2[8][1]=0;vaquero2[8][2]=0;vaquero2[8][3]=0;vaquero2[8][4]=0;vaquero2[8][5]=219;vaquero2[8][6]=219;vaquero2[8][7]=219;vaquero2[8][8]=219;vaquero2[8][9]=0;
+	vaquero2[9][0]=0;vaquero2[9][1]=0;vaquero2[9][2]=0;vaquero2[9][3]=0;vaquero2[9][4]=0;vaquero2[9][5]=219;vaquero2[9][6]=0;vaquero2[9][7]=0;vaquero2[9][8]=219;vaquero2[9][9]=0;
+	vaquero2[10][0]=0;vaquero2[10][1]=0;vaquero2[10][2]=0;vaquero2[10][3]=0;vaquero2[10][4]=219;vaquero2[10][5]=219;vaquero2[10][6]=0;vaquero2[10][7]=219;vaquero2[10][8]=219;vaquero2[10][9]=0;
+	vaquero2[11][0]=0;vaquero2[11][1]=0;vaquero2[11][2]=0;vaquero2[11][3]=0;vaquero2[11][4]=0;vaquero2[11][5]=0;vaquero2[11][6]=0;vaquero2[11][7]=0;vaquero2[11][8]=0;vaquero2[11][9]=0;
+	
+	vaquero3[0][0]=0;vaquero3[0][1]=0;vaquero3[0][2]=0;vaquero3[0][3]=0;vaquero3[0][4]=0;vaquero3[0][5]=0;vaquero3[0][6]=0;vaquero3[0][7]=0;vaquero3[0][8]=0;vaquero3[0][9]=0;
+	vaquero3[1][0]=0;vaquero3[1][1]=0;vaquero3[1][2]=0;vaquero3[1][3]=0;vaquero3[1][4]=0;vaquero3[1][5]=0;vaquero3[1][6]=0;vaquero3[1][7]=0;vaquero3[1][8]=0;vaquero3[1][9]=0;
+	vaquero3[2][0]=0;vaquero3[2][1]=0;vaquero3[2][2]=0;vaquero3[2][3]=0;vaquero3[2][4]=0;vaquero3[2][5]=0;vaquero3[2][6]=0;vaquero3[2][7]=0;vaquero3[2][8]=0;vaquero3[2][9]=0;
+	vaquero3[3][0]=0;vaquero3[3][1]=220;vaquero3[3][2]=220;vaquero3[3][3]=0;vaquero3[3][4]=0;vaquero3[3][5]=0;vaquero3[3][6]=0;vaquero3[3][7]=0;vaquero3[3][8]=0;vaquero3[3][9]=0;
+	vaquero3[4][0]=0;vaquero3[4][1]=219;vaquero3[4][2]=0;vaquero3[4][3]=0;vaquero3[4][4]=219;vaquero3[4][5]=0;vaquero3[4][6]=0;vaquero3[4][7]=0;vaquero3[4][8]=0;vaquero3[4][9]=0;
+	vaquero3[5][0]=0;vaquero3[5][1]=219;vaquero3[5][2]=0;vaquero3[5][3]=0;vaquero3[5][4]=219;vaquero3[5][5]=0;vaquero3[5][6]=0;vaquero3[5][7]=219;vaquero3[5][8]=0;vaquero3[5][9]=0;
+	vaquero3[6][0]=0;vaquero3[6][1]=219;vaquero3[6][2]=220;vaquero3[6][3]=220;vaquero3[6][4]=219;vaquero3[6][5]=0;vaquero3[6][6]=219;vaquero3[6][7]=219;vaquero3[6][8]=219;vaquero3[6][9]=0;
+	vaquero3[7][0]=0;vaquero3[7][1]=219;vaquero3[7][2]=219;vaquero3[7][3]=219;vaquero3[7][4]=219;vaquero3[7][5]=219;vaquero3[7][6]=219;vaquero3[7][7]=219;vaquero3[7][8]=219;vaquero3[7][9]=0;
+	vaquero3[8][0]=0;vaquero3[8][1]=0;vaquero3[8][2]=0;vaquero3[8][3]=0;vaquero3[8][4]=0;vaquero3[8][5]=0;vaquero3[8][6]=0;vaquero3[8][7]=219;vaquero3[8][8]=0;vaquero3[8][9]=0;
+	vaquero3[9][0]=0;vaquero3[9][1]=0;vaquero3[9][2]=0;vaquero3[9][3]=0;vaquero3[9][4]=0;vaquero3[9][5]=0;vaquero3[9][6]=0;vaquero3[9][7]=0;vaquero3[9][8]=0;vaquero3[9][9]=0;
+	vaquero3[10][0]=0;vaquero3[10][1]=0;vaquero3[10][2]=0;vaquero3[10][3]=0;vaquero3[10][4]=0;vaquero3[10][5]=0;vaquero3[10][6]=0;vaquero3[10][7]=0;vaquero3[10][8]=0;vaquero3[10][9]=0;
+	vaquero3[11][0]=0;vaquero3[11][1]=0;vaquero3[11][2]=0;vaquero3[11][3]=0;vaquero3[11][4]=0;vaquero3[11][5]=0;vaquero3[11][6]=0;vaquero3[11][7]=0;vaquero3[11][8]=0;vaquero3[11][9]=0;
+	
+	
+	break;
+	
+}
+	switch(dibujo){
+		
+		
+	case 1:
+		for(int j=0;j<12;j++){
+			for(int i=0;i<10;i++){
+				gotoxy(x+i,y+j);
+				cout<<vaquero[j][i];
+			}
+			cout<<endl;
+		}
+		break;
+	case 2:
+		for(int j=0;j<11;j++){
+			for(int i=0;i<10;i++){
+				gotoxy(x+i,y+j);
+				cout<<vaquero2[j][i];
+			}
+			cout<<endl;
+		}
+		break;
+	case 3:
+		for(int j=0;j<12;j++){
+			for(int i=0;i<10;i++){
+				gotoxy(x+i,y+j);
+				cout<<vaquero3[j][i];
+			}
+			cout<<endl;
+		}
+		break;
+	}
+	textcolor(1);
+	
+}
+
+
+////////////////////////////CLASE CARRO
+
+class CARRO{
+	
+private:
+	char carro[11][12];
+	
+	int x;
+	int y;
+	int dir;
+public:
+	CARRO();
+	void mostrar();
+	void movimiento();
+	int get_x(){return x;};
+	int get_y(){return y;};
+	
+};
+
+CARRO::CARRO(){
+	
+	//dibujo carro
+		carro[0][0]=0;carro[0][1]=0;carro[0][2]=0;carro[0][3]=0;carro[0][4]=0;carro[0][5]=0;carro[0][6]=0;carro[0][7]=0;carro[0][8]=0;carro[0][9]=0;carro[0][10]=0;carro[0][11]=0;
+		carro[1][0]=0;carro[1][1]=0;carro[1][2]=0;carro[1][3]=0;carro[1][4]=0;carro[1][5]=0;carro[1][6]=0;carro[1][7]=0;carro[1][8]=0;carro[1][9]=0;carro[1][10]=0;carro[1][11]=0;
+		carro[2][0]=0;carro[2][1]=0;carro[2][2]=0;carro[2][3]=0;carro[2][4]=0;carro[2][5]=219;carro[2][6]=219;carro[2][7]=219;carro[2][8]=0;carro[2][9]=0;carro[2][10]=0;carro[2][11]=0;
+		carro[3][0]=0;carro[3][1]=0;carro[3][2]=0;carro[3][3]=0;carro[3][4]=219;carro[3][5]=219;carro[3][6]=0;carro[3][7]=219;carro[3][8]=219;carro[3][9]=0;carro[3][10]=0;carro[3][11]=0;
+		carro[4][0]=0;carro[4][1]=0;carro[4][2]=0;carro[4][3]=0;carro[4][4]=219;carro[4][5]=0;carro[4][6]=0;carro[4][7]=0;carro[4][8]=219;carro[4][9]=0;carro[4][10]=0;carro[4][11]=0;
+		carro[5][0]=0;carro[5][1]=0;carro[5][2]=0;carro[5][3]=0;carro[5][4]=219;carro[5][5]=219;carro[5][6]=219;carro[5][7]=219;carro[5][8]=219;carro[5][9]=0;carro[5][10]=0;carro[5][11]=0;
+		carro[6][0]=0;carro[6][1]=0;carro[6][2]=219;carro[6][3]=0;carro[6][4]=219;carro[6][5]=219;carro[6][6]=219;carro[6][7]=219;carro[6][8]=219;carro[6][9]=0;carro[6][10]=219;carro[6][11]=0;
+		carro[7][0]=0;carro[7][1]=0;carro[7][2]=219;carro[7][3]=219;carro[7][4]=219;carro[7][5]=219;carro[7][6]=219;carro[7][7]=219;carro[7][8]=219;carro[7][9]=219;carro[7][10]=219;carro[7][11]=0;
+		carro[8][0]=0;carro[8][1]=0;carro[8][2]=219;carro[8][3]=0;carro[8][4]=0;carro[8][5]=0;carro[8][6]=0;carro[8][7]=0;carro[8][8]=0;carro[8][9]=0;carro[8][10]=219;carro[8][11]=0;
+		carro[9][0]=0;carro[9][1]=0;carro[9][2]=0;carro[9][3]=0;carro[9][4]=0;carro[9][5]=0;carro[9][6]=0;carro[9][7]=0;carro[9][8]=0;carro[9][9]=0;carro[9][10]=0;carro[9][11]=0;
+		
+		x=32;
+		y=15;
+		dir=1;
+}
+
+void CARRO::mostrar(){
+	
+	for(int j=0;j<10;j++){
+		for(int i=0;i<12;i++){
+			textcolor(BROWN);
+			gotoxy(x+i,y+j);
+			cout<<carro[j][i];
+			textcolor(WHITE);
+		}
+		cout<<endl;
+	}
+	
+}
+
+void CARRO::movimiento(){
+	
+	switch(dir){
+		
+	case 1://arriba
+		
+		if(y>3){
+		y--;
+		}
+		if(y<=3){
+			dir=2;
+		}
+		break;
+	case 2://abajo
+		if(y<19){
+			y++;
+		}
+		if(y>=19){
+			dir=1;
+		}
+	}
+	
+}
+
+///////////////////////////CLASE BALA
+
+class bala{
+	
+private:
+	
+	char balita;
+	int x;
+	int y;
+	bool choque;
+	bool choque_carro;
+	bool choque_pared;
+public:
+	bala(int x,int y);
+	void mostrar(int borrar);
+	void setX(int dir);
+	int get_x(){return x;};
+	int get_y(){return y;};
+	void colision_jugador(class cowboy *&jugador1);
+	void colision_npc(class cowboy *&cpu);
+	bool colision_carro(class CARRO &objeto);
+	
+	
+	bool choke(){return choque;};
+	bool choke_carro(){return choque_carro;};
+	bool choke_pared(){return choque_pared;};
+};
+
+bala::bala(int _x,int _y){
+	
+	x=_x;
+	y=_y;
+	balita='o';
+	choque=false;
+	choque_carro=false;
+	choque_pared=false;
+}
+
+void bala::mostrar(int borrar){//dibujar bala en pantalla
+	
+	
+	switch(borrar){
+	
+	case 1:	
+		gotoxy(x-1,y);
+		cout<<" ";
+		break;
+	case 2:
+		gotoxy(x+1,y);
+		cout<<" ";
+	
+	}
+	textcolor(WHITE);
+	gotoxy(x,y);
+	cout<<balita;
+	
+}
+
+void bala::setX(int dir){//movimiento de la bala 
+	
+	
+	switch(dir){
+		
+	case 1:	
+		if(x<78){
+			x++;
+		}
+		break;
+	case 2:
+		if(x>2){
+			x--;
+		}
+		break;
+	}
+	
+	if(x==78){
+		
+		gotoxy(x,y);
+		cout<<" ";	
+		choque_pared=true;
+	}
+	if(x==2){
+		gotoxy(x,y);
+		cout<<" ";
+		choque_pared=true;
+	}
+}
+
+
+void bala::colision_jugador(class cowboy *&jugador1){
+	if((x<=jugador1->get_x()+8&&y>=jugador1->get_y()+1&&y<=jugador1->get_y()+10)){
+		
+		choque=true;
+	}
+}
+
+void bala::colision_npc(class cowboy *&cpu){
+	if(x>=cpu->get_x()+2&&y>=cpu->get_y()+1&&y<=cpu->get_y()+10){		
+		choque=true;
+		gotoxy(x,y);
+		cout<<" ";	
+	}
+}
+bool bala::colision_carro(class CARRO &objeto){
+	
+	if(x>=objeto.get_x()+2&&x<=objeto.get_x()+9&&y>=objeto.get_y()+2&&y<=objeto.get_y()+9){
+		return true;
+	}
+	else{
+		return false;
+	}
+}
+
+///////////////////////////FUNCIONES
+
+
+void main_menu();
+void tiempo(float temp);
+void marcos();
+
+
+////////////////funciones del juego terminado
+void fin_juego(int puntos,int puntosnpc);
+
+void leer_score();
+
+void anotar_puntaje(int puntaje);
+
+void guardar_datos();
+
+void mostrar_score();
+
+///////////////////VARIABLES GLOBALES
+
+bool game_over=true;
+bool Mmenu=true;
+float temp=0.10;
+
+int color_jugador=5;
+int color_npc=2;
+
+int forma_jugador=1;
+int forma_npc=1;
+
+int puntos[5];
+
+string nombre[5];
+
+
+int main(int argc, char *argv[]) {
+	
+	srand(time(NULL));
+	
+/////////VARIABLES	
+	
+	
+	
+	float contador=0;
+	float tiempo_mov=0;
+	int disparo=1;//lapso de tiempo entre disparos del npc
+	int disparo_jugador=1;//limitador de disparos del jugador
+	int tiempo_jugador=10;//lapso de tiempo que debe pasar en cada disparo
+	int tiempo_sleep=0;//tiempo para dibujar el da�o, restar vida
+	int tiempo_objeto=0;//temporizador para cambio de movimiento del carro
+	int tiempodejuego=0;
+	
+	
+	
+	
+	int objeto_vel=0;//limitador de velocidad del carro
+	
+	int dibujo_jugador=1;//parametro para dibujar jugador
+	int dibujo_cpu=1;//parametro para dibujar npc
+	
+	int punto_jugador=0;
+	int punto_npc=3;
+	
+	bool activar_delay=false;
+	bool activar_delay2=false;
+	
+	
+	
+///////////////FUNCIONES	
+	
+	main_menu();
+	
+	
+	tiempo(temp);
+	marcos();
+	
+	
+////////CLASES
+	
+	cowboy *jugador1;
+	jugador1=new jugador(color_jugador,forma_jugador);
+	
+	
+	jugador1->mostrar(jugador1->get_x(),jugador1->get_y(),1);
+	
+	cowboy *cpu;
+	cpu=new npc(color_npc,color_npc,forma_npc);
+	cpu->mostrar(cpu->get_x(),cpu->get_y(),1);
+	
+	list<bala*>B;//balas para jugador
+	list<bala*>::iterator balita;
+	
+	list<bala*>C;//balas para npc
+	list<bala*>::iterator balita2;
+	
+	
+	CARRO objeto;
+	objeto.mostrar();
+	
+	
+////////PUNTAJE	
+		
+	
+	
+	
+///////LOOP
+	
+	
+	while(!game_over){		
+		
+		gotoxy(1,1);
+		textcolor(WHITE);
+		cout<<"PUNTOS JUGADOR: "<<punto_jugador;
+		gotoxy(25,1);
+		cout<<"VIDAS JUGADOR: "<<punto_npc;
+		
+		
+		//funciones
+		tiempodejuego++;
+		
+		
+		//tiempo de juego, en determinado tiempo termina la partida
+		
+		if(tiempodejuego==800){//si termina el tiempo, se termina la partida
+			game_over=true;
+		}
+		
+		if(punto_npc<=0){//si el jugador muere, termina la partida
+			
+			game_over=true;
+			
+			clrscr();
+			
+			cout<<endl<<endl<<endl<<"..................MORISTE................";
+			
+			Sleep(1000);
+		}
+		
+		contador+=1;//usar contador como cronometro	
+		tiempo_mov+=1;//regulador de velocidad de npc
+		tiempo_jugador+=1;
+		
+		jugador1->mostrar(jugador1->get_x(),jugador1->get_y(),dibujo_jugador);
+		
+		
+	////////////CARRO	
+		objeto.mostrar();
+		
+		objeto_vel++;
+		if(objeto_vel==3){
+		objeto.movimiento();
+		objeto_vel=0;
+		}
+		
+	////////////TECLADO			
+	if(kbhit()){//teclado
+		switch(getch()){
+				
+			//General
+				
+			case 27://SALIR DEL JUEGO
+			game_over=true;
+			break;
+			//CONTROLES JUGADOR
+			case 80://arriba
+				jugador1->movimiento(2);
+				dibujo_jugador=1;
+				
+				break;
+			case 72://abajo
+				jugador1->movimiento(1);
+				dibujo_jugador=1;
+				break;
+			case 77://derecha
+				jugador1->movimiento(4);
+				dibujo_jugador=1;
+				break;
+			case 75://izquierda
+				jugador1->movimiento(3);
+				dibujo_jugador=1;
+				break;
+			case 32://disparo
+				dibujo_jugador=2;
+				if(disparo_jugador==1){
+				B.push_back(new bala(jugador1->get_x()+10,jugador1->get_y()+3));
+				tiempo_jugador=0;
+				}
+				break;				
+			}
+		}	
+	
+	
+	//////////////////////////////////////////////////////////////////////
+	
+	for(balita=B.begin();balita!=B.end();balita++){//creacion de balas jugador 1
+		
+		(*balita)->colision_npc(cpu);
+		(*balita)->colision_carro(objeto);
+		
+		
+		
+		if(!(*balita)->choke()){
+		(*balita)->mostrar(1); 		
+		(*balita)->setX(1);	
+		if((*balita)->colision_carro(objeto)){
+			gotoxy((*balita)->get_x()-1,(*balita)->get_y());
+			cout<<"    ";
+			delete(*balita);
+			balita=B.erase(balita);		
+		}
+		
+		
+		
+		}
+		else{
+			
+			if((*balita)->choke_pared()){//si colisiona contra la pared solo se borra
+			
+			gotoxy((*balita)->get_x(),(*balita)->get_y());
+			cout<<"   ";
+			delete(*balita);
+			balita=B.erase(balita);
+			//activar_delay2=true;
+			}
+			else{//si colisiona contra rival ademas de borrarse comienza la funcion de los puntos
+				gotoxy((*balita)->get_x(),(*balita)->get_y());
+				cout<<"   ";
+				delete(*balita);
+				balita=B.erase(balita);
+				activar_delay2=true;
+				punto_jugador++;
+				
+			}
+			
+		}
+		
+	}
+	
+	if(tiempo_jugador>40){//cada cierto tiempo el jugador puede disparar
+		disparo_jugador=1;
+	}
+	else{
+		disparo_jugador=2;
+	}
+	
+	///////////MOVIMIENTO DE NPC
+		
+	cpu->mostrar(cpu->get_x(),cpu->get_y(),dibujo_cpu);
+	
+	int dire;
+	if(tiempo_mov==3){//regular velocidad de npc
+	
+	cpu->movimiento(dire);	
+	
+	tiempo_mov=0;
+	dibujo_cpu=1;
+	}
+		
+	if(contador>40){//actualizar movimiento de npc
+		int tiempo=0;		
+		tiempo++;
+		
+		dire=rand()%5+1;
+		//cpu->set_dir();//////cuidado esto
+		disparo=rand()%2+1;
+		contador=0;	
+		
+	}
+	
+	if(disparo==2){
+	C.push_back(new bala(cpu->get_x(),cpu->get_y()+6));
+	disparo=1;
+	dibujo_cpu=2;
+	}
+	for(balita2=C.begin();balita2!=C.end();balita2++){//creacion de balas npc
+		
+		(*balita2)->colision_jugador(jugador1);
+		(*balita2)->colision_carro(objeto);
+		
+		if(!(*balita2)->choke()){//si la bala no colisiona con el jugador
+		(*balita2)->mostrar(2);
+		(*balita2)->setX(2);
+		
+		
+		if((*balita2)->colision_carro(objeto)){
+			gotoxy((*balita2)->get_x(),(*balita2)->get_y());
+			cout<<"  ";
+			delete(*balita2);
+			balita2=C.erase(balita2);
+		}
+		
+		}
+		else{//si la bala colisiona contra jugador
+			
+			if((*balita2)->choke_pared()){
+				
+				gotoxy((*balita2)->get_x(),(*balita2)->get_y());
+				cout<<"  ";
+				delete(*balita2);
+				balita2=C.erase(balita2);
+				
+			}
+			
+			else{
+			//dibujo_jugador=3;
+			gotoxy((*balita2)->get_x(),(*balita2)->get_y());
+			cout<<"  ";
+			delete(*balita2);
+			balita2=C.erase(balita2);			
+			activar_delay=true;			
+			punto_npc--;
+			}
+		}
+		}
+	
+	
+		if(activar_delay){//da�o al jugador
+		
+		
+		tiempo_sleep++;
+		dibujo_jugador=3;
+		if(tiempo_sleep>5){
+		Sleep(1500);
+		tiempo_sleep=0;
+		activar_delay=false;
+		}
+	}
+		if(activar_delay2){//da�o al npc
+			
+			
+			tiempo_sleep++;
+			dibujo_cpu=3;
+			if(tiempo_sleep>5){
+				
+				Sleep(1500);
+				
+				tiempo_sleep=0;
+				activar_delay2=false;
+			}
+			
+		}
+	
+	
+	
+	}//llave del loop
+	
+	clrscr();
+	
+	fin_juego(punto_jugador,punto_npc);
+	
+	
+	
+	return 0;
+}
+
+//////////////////////////FUNCIONES
+
+void leer_score(){
+	ifstream entrada;
+	
+	entrada.open("score.txt",ios::in);
+	
+	
+	for(int i=0;i<5;i++){
+		
+		entrada>>puntos[i];
+		entrada>>nombre[i];
+		
+	}
+	
+	entrada.close();
+}
+
+void anotar_puntaje(int puntaje){
+	string Nombre;
+	if(puntaje>puntos[5]){
+		 
+		textbackground(RED);
+		textcolor(LIGHTBLUE);
+		cout<<"		"<<"MMMM VEAMOS SI ENTRASTE ENTRE LXS MAS CAPXS DE LXS CAPXS"<<"	"<<endl;
+		textcolor(WHITE);
+		textbackground(BLACK);
+		cout<<endl<<endl<<"NOMBRE? ";
+		cin>>Nombre;		
+		puntos[5]=puntaje;
+		nombre[5]=Nombre;
+		
+	}
+	else{
+		
+		textbackground(RED);
+		textcolor(LIGHTBLUE);
+		cout<<endl<<"				"<<"TE FUE MUY MAL, ESTA VEZ NO VAS A APARECER EN LA LISTA DE LXS MAS CAPXS"<<"			"<<endl;
+		textcolor(WHITE);
+		textbackground(BLACK);
+		
+	}
+	
+}
+
+void guardar_datos(){
+	ofstream guardar("score.txt");
+	
+	for(int i=0;i<5;i++){
+		
+		guardar<<puntos[i]<<'\n'<<nombre[i]<<'\n';
+		
+	}
+	guardar.close();
+}
+
+void mostrar_score(){
+	for(int j=0;j<5;j++){
+		for(int i=0;i<5;i++){
+			
+			if(puntos[i] <puntos[i+1]){
+				
+				int temp_puntos=puntos[i];
+				string temp_nombre=nombre[i];
+				
+				puntos[i]=puntos[i+1];
+				nombre[i]=nombre[i+1];
+				
+				puntos[i+1]=temp_puntos;
+				nombre[i+1]=temp_nombre;
+				
+			}
+			
+		}
+	}
+	for(int i=0;i<5;i++){
+		cout<<"  "<<nombre[i]<<".............."<<puntos[i]<<endl<<endl;
+	}
+	
+	guardar_datos();
+	
+	
+}
+
+void fin_juego(int puntos,int puntosnpc){
+	
+	
+	int puntaje;
+	
+	puntaje=(puntos)*100;
+	
+	leer_score();//lee y obtiene los datos de la tabal de score
+	
+	anotar_puntaje(puntaje);
+	cout<<endl<<endl<<"CARGANDO..............."<<endl<<endl;
+	Sleep(2000);
+	
+	textbackground(LIGHTBLUE);
+	cout<<"		TABLA DE LXS MAS CAPXS DE LOS CAPXS		"<<endl<<endl<<endl;
+	
+	
+	
+	
+	mostrar_score();
+	
+}
+
+
+
+void tiempo(float temp){
+	
+	clock_t reloj1=clock()+temp*CLOCKS_PER_SEC;
+	while(clock()<reloj1)
+	{
+		
+	}	
+}
+
+void marcos(){//dibujar los bordes en pantalla
+	
+	char fila=205;
+	char col=186;
+	char arribader=187;
+	char arribaizq=201;
+	char abajoder=188;
+	char abajoizq=200;
+	
+	textcolor(LIGHTRED);
+	
+	gotoxy(79,2);
+	cout<<arribader;
+	
+	gotoxy(1,2);
+	cout<<arribaizq;
+	
+	gotoxy(79,29);
+	cout<<abajoder;
+	
+	gotoxy(1,29);
+	cout<<abajoizq;
+	
+	
+	for(int i=2;i<79;i++){
+	gotoxy(i,2);
+	cout<<fila;
+	gotoxy(i,29);
+	cout<<fila;
+	}
+	
+	for(int j=3;j<29;j++){
+		gotoxy(1,j);
+		cout<<col;
+		gotoxy(79,j);
+		cout<<col;
+	}
+	
+	textcolor(WHITE);
+}
+
+void main_menu(){
+	
+/////////////////////////DIBUJAR REVOLVER
+	
+	ifstream menu;
+	string revolver;
+	
+	menu.open("menu.txt",ios::in);
+	
+	while(!menu.eof()){//mientras que no sea el final del archivo
+		
+		getline(menu,revolver);
+		cout<<revolver<<endl;
+		
+	}
+	menu.close();
+	
+	
+	///////////VARIABLES
+	bool activar=false;
+	
+	char cursor='*';
+	int cursor_y=19;
+	
+	char vaquero[12][10];//dibujo para jugador en main menu
+	
+	char vaquero1[12][10];//dibujo para npc en main menu
+	
+	
+	//dibujo por defecto de jugador 
+	vaquero [0][0]=0;vaquero [0][1]=0;vaquero [0][2]=0;vaquero [0][3]=0;vaquero [0][4]=0;vaquero [0][5]=0;vaquero [0][6]=0;vaquero [0][7]=0;vaquero [0][8]=0;vaquero [0][9]=0;
+	vaquero [1][0]=0;vaquero [1][1]=0;vaquero [1][2]=0;vaquero [1][3]=0;vaquero [1][4]=219;vaquero [1][5]=219;vaquero [1][6]=0;vaquero [1][7]=0;vaquero [1][8]=0;vaquero [1][9]=0;
+	vaquero [2][0]=0;vaquero [2][1]=0;vaquero [2][2]=0;vaquero [2][3]=220;vaquero [2][4]=219;vaquero [2][5]=219;vaquero [2][6]=220;vaquero [2][7]=0;vaquero [2][8]=0;vaquero [2][9]=0;
+	vaquero [3][0]=0;vaquero [3][1]=0;vaquero [3][2]=0;vaquero [3][3]=0;vaquero [3][4]=219;vaquero [3][5]=219;vaquero [3][6]=0;vaquero [3][7]=0;vaquero [3][8]=0;vaquero [3][9]=0;
+	vaquero [4][0]=0;vaquero [4][1]=0;vaquero [4][2]=0;vaquero [4][3]=219;vaquero[4][4]=219;vaquero [4][5]=219;vaquero [4][6]=219;vaquero [4][7]=0;vaquero [4][8]=0;vaquero [4][9]=0;
+	vaquero [5][0]=0;vaquero [5][1]=0;vaquero [5][2]=219;vaquero[5][3]=0;vaquero [5][4]=219;vaquero [5][5]=219;vaquero [5][6]=0;vaquero [5][7]=219;vaquero [5][8]=0;vaquero [5][9]=0;
+	vaquero [6][0]=0;vaquero [6][1]=0;vaquero [6][2]=219;vaquero[6][3]=0;vaquero [6][4]=219;vaquero [6][5]=219;vaquero [6][6]=0;vaquero [6][7]=219;vaquero [6][8]=0;vaquero [6][9]=0;
+	vaquero [7][0]=0;vaquero [7][1]=0;vaquero [7][2]=0;vaquero [7][3]=0;vaquero[7][4]=219;vaquero [7][5]=219;vaquero [7][6]=0;vaquero[7][7]=0;vaquero [7][8]=0;vaquero [7][9]=0;
+	vaquero [8][0]=0;vaquero [8][1]=0;vaquero [8][2]=0;vaquero [8][3]=219;vaquero[8][4]=0;vaquero [8][5]=0;vaquero [8][6]=219;vaquero [8][7]=0;vaquero [8][8]=0;vaquero [8][9]=0;
+	vaquero [9][0]=0;vaquero [9][1]=220;vaquero [9][2]=219;vaquero[9][3]=0;vaquero [9][4]=0;vaquero [9][5]=0;vaquero [9][6]=0;vaquero [9][7]=219;vaquero [9][8]=220;vaquero [9][9]=0;
+	vaquero [10][0]=0;vaquero [10][1]=0;vaquero[10][2]=0;vaquero [10][3]=0;vaquero[10][4]=0;vaquero [10][5]=0;vaquero [10][6]=0;vaquero [10][7]=0;vaquero [10][8]=0;vaquero [10][9]=0;
+	vaquero [11][0]=0;vaquero [11][1]=0;vaquero [11][2]=0;vaquero [11][3]=0;vaquero [11][4]=0;vaquero [11][5]=0;vaquero [11][6]=0;vaquero [11][7]=0;vaquero [11][8]=0;vaquero [11][9]=0;
+	
+	//dibujo por defecto de npc
+	vaquero1[0][0]=0;vaquero1[0][1]=0;vaquero1[0][2]=0;vaquero1[0][3]=0;vaquero1[0][4]=0;vaquero1[0][5]=0;vaquero1[0][6]=0;vaquero1[0][7]=0;vaquero1[0][8]=0;vaquero1[0][9]=0;
+	vaquero1[1][0]=0;vaquero1[1][1]=0;vaquero1[1][2]=0;vaquero1[1][3]=0;vaquero1[1][4]=0;vaquero1[1][5]=0;vaquero1[1][6]=0;vaquero1[1][7]=0;vaquero1[1][8]=0;vaquero1[1][9]=0;
+	vaquero1[2][0]=0;vaquero1[2][1]=0;vaquero1[2][2]=0;vaquero1[2][3]=0;vaquero1[2][4]=0;vaquero1[2][5]=219;vaquero1[2][6]=219;vaquero1[2][7]=0;vaquero1[2][8]=0;vaquero1[2][9]=0;
+	vaquero1[3][0]=0;vaquero1[3][1]=0;vaquero1[3][2]=0;vaquero1[3][3]=0;vaquero1[3][4]=220;vaquero1[3][5]=219;vaquero1[3][6]=219;vaquero1[3][7]=220;vaquero1[3][8]=0;vaquero1[3][9]=0;
+	vaquero1[4][0]=0;vaquero1[4][1]=0;vaquero1[4][2]=0;vaquero1[4][3]=0;vaquero1[4][4]=0;vaquero1[4][5]=219;vaquero1[4][6]=219;vaquero1[4][7]=0;vaquero1[4][8]=0;vaquero1[4][9]=0;
+	vaquero1[5][0]=0;vaquero1[5][1]=0;vaquero1[5][2]=0;vaquero1[5][3]=0;vaquero1[5][4]=219;vaquero1[5][5]=219;vaquero1[5][6]=219;vaquero1[5][7]=219;vaquero1[5][8]=0;vaquero1[5][9]=0;
+	vaquero1[6][0]=0;vaquero1[6][1]=0;vaquero1[6][2]=0;vaquero1[6][3]=219;vaquero1[6][4]=0;vaquero1[6][5]=219;vaquero1[6][6]=219;vaquero1[6][7]=0;vaquero1[6][8]=219;vaquero1[6][9]=0;
+	vaquero1[7][0]=0;vaquero1[7][1]=0;vaquero1[7][2]=0;vaquero1[7][3]=219;vaquero1[7][4]=0;vaquero1[7][5]=219;vaquero1[7][6]=219;vaquero1[7][7]=0;vaquero1[7][8]=219;vaquero1[7][9]=0;
+	vaquero1[8][0]=0;vaquero1[8][1]=0;vaquero1[8][2]=0;vaquero1[8][3]=0;vaquero1[8][4]=219;vaquero1[8][5]=0;vaquero1[8][6]=0;vaquero1[8][7]=219;vaquero1[8][8]=0;vaquero1[8][9]=0;
+	vaquero1[9][0]=0;vaquero1[9][1]=0;vaquero1[9][2]=0;vaquero1[9][3]=0;vaquero1[9][4]=219;vaquero1[9][5]=0;vaquero1[9][6]=0;vaquero1[9][7]=219;vaquero1[9][8]=0;vaquero1[9][9]=0;
+	vaquero1[10][0]=0;vaquero1[10][1]=0;vaquero1[10][2]=0;vaquero1[10][3]=219;vaquero1[10][4]=219;vaquero1[10][5]=0;vaquero1[10][6]=0;vaquero1[10][7]=219;vaquero1[10][8]=219;vaquero1[10][9]=0;
+	vaquero1[11][0]=0;vaquero1[11][1]=0;vaquero1[11][2]=0;vaquero1[11][3]=0;vaquero1[11][4]=0;vaquero1[11][5]=0;vaquero1[11][6]=0;vaquero1[11][7]=0;vaquero1[11][8]=0;vaquero1[11][9]=0;
+	
+	
+	
+	int x=16;
+	int y=11;
+	int cpu_x=56;
+	int cpu_y=11;
+	///////////////////////
+	gotoxy(35,9);
+	cout<<"---------------";
+	
+	gotoxy(34,10);
+	cout<<"|   MAIN MENU   |";
+	
+	gotoxy(35,11);
+	cout<<"---------------";
+	
+	gotoxy(33,15);
+	textcolor(5);
+	cout<<"Jugador";
+	textcolor(1);	
+	
+	gotoxy(33,17);
+	textcolor(11);
+	cout<<"Jugador";
+	textcolor(1);
+	
+	gotoxy(1,24);
+	textcolor(WHITE);
+	cout<<"BARRA ESPACIADORA para comenzar partida"<<"...."<<"ENTER para elegir personajes";
+	
+	
+	gotoxy(33,19);
+	textcolor(2);
+	cout<<"Computadora";
+	textcolor(1);
+	
+	gotoxy(33,21);
+	textcolor(14);
+	cout<<"Computadora";
+	textcolor(1);
+	
+	
+	
+	gotoxy(16,10);
+	textbackground(RED);
+	cout<<" JUGADOR 1 ";
+	textbackground(BLACK);
+	
+	gotoxy(55,10);
+	textbackground(RED);
+	cout<<" COMPUTADORA ";
+	textbackground(BLACK);
+	
+	while(!activar){
+		
+		Sleep(100);
+		
+		gotoxy(30,cursor_y);
+		cout<<cursor;
+		
+		///////////dibujar jugadores con su respectivo color en pantalla
+		
+		
+		
+		
+		for(int j=0;j<12;j++){//dibujar jugador 1
+			for(int i=0;i<10;i++){
+				textcolor(color_jugador);
+				gotoxy(x+i,y+j);
+				cout<<vaquero[j][i];
+				textcolor(1);
+			}
+			cout<<endl;
+		}
+		
+		for(int j=0;j<12;j++){//dibujar npc
+			for(int i=0;i<10;i++){
+				textcolor(color_npc);
+				gotoxy(cpu_x+i,cpu_y+j);
+				cout<<vaquero1[j][i];
+				//textcolor(1);
+			}
+			cout<<endl;
+		}
+		
+		
+		
+		if(kbhit()){
+			switch(getch()){
+				
+				
+			case 72://arriba	
+				if(cursor_y>15){
+					gotoxy(30,cursor_y);
+					cout<<" ";
+					cursor_y-=2;
+				}
+				break;
+				
+			case 80://abajo
+				if(cursor_y<21){
+					gotoxy(30,cursor_y);
+					cout<<" ";
+					cursor_y+=2;
+				}
+				break;
+				
+			case 13://Al presionar la tecla Enter
+				if(cursor_y==15){
+					color_jugador=5;	
+					forma_jugador=1;
+					vaquero [0][0]=0;vaquero [0][1]=0;vaquero [0][2]=0;vaquero [0][3]=0;vaquero [0][4]=0;vaquero [0][5]=0;vaquero [0][6]=0;vaquero [0][7]=0;vaquero [0][8]=0;vaquero [0][9]=0;
+					vaquero [1][0]=0;vaquero [1][1]=0;vaquero [1][2]=0;vaquero [1][3]=0;vaquero [1][4]=219;vaquero [1][5]=219;vaquero [1][6]=0;vaquero [1][7]=0;vaquero [1][8]=0;vaquero [1][9]=0;
+					vaquero [2][0]=0;vaquero [2][1]=0;vaquero [2][2]=0;vaquero [2][3]=220;vaquero [2][4]=219;vaquero [2][5]=219;vaquero [2][6]=220;vaquero [2][7]=0;vaquero [2][8]=0;vaquero [2][9]=0;
+					vaquero [3][0]=0;vaquero [3][1]=0;vaquero [3][2]=0;vaquero [3][3]=0;vaquero [3][4]=219;vaquero [3][5]=219;vaquero [3][6]=0;vaquero [3][7]=0;vaquero [3][8]=0;vaquero [3][9]=0;
+					vaquero [4][0]=0;vaquero [4][1]=0;vaquero [4][2]=0;vaquero [4][3]=219;vaquero[4][4]=219;vaquero [4][5]=219;vaquero [4][6]=219;vaquero [4][7]=0;vaquero [4][8]=0;vaquero [4][9]=0;
+					vaquero [5][0]=0;vaquero [5][1]=0;vaquero [5][2]=219;vaquero[5][3]=0;vaquero [5][4]=219;vaquero [5][5]=219;vaquero [5][6]=0;vaquero [5][7]=219;vaquero [5][8]=0;vaquero [5][9]=0;
+					vaquero [6][0]=0;vaquero [6][1]=0;vaquero [6][2]=219;vaquero[6][3]=0;vaquero [6][4]=219;vaquero [6][5]=219;vaquero [6][6]=0;vaquero [6][7]=219;vaquero [6][8]=0;vaquero [6][9]=0;
+					vaquero [7][0]=0;vaquero [7][1]=0;vaquero [7][2]=0;vaquero [7][3]=0;vaquero[7][4]=219;vaquero [7][5]=219;vaquero [7][6]=0;vaquero[7][7]=0;vaquero [7][8]=0;vaquero [7][9]=0;
+					vaquero [8][0]=0;vaquero [8][1]=0;vaquero [8][2]=0;vaquero [8][3]=219;vaquero[8][4]=0;vaquero [8][5]=0;vaquero [8][6]=219;vaquero [8][7]=0;vaquero [8][8]=0;vaquero [8][9]=0;
+					vaquero [9][0]=0;vaquero [9][1]=220;vaquero [9][2]=219;vaquero[9][3]=0;vaquero [9][4]=0;vaquero [9][5]=0;vaquero [9][6]=0;vaquero [9][7]=219;vaquero [9][8]=220;vaquero [9][9]=0;
+					vaquero [10][0]=0;vaquero [10][1]=0;vaquero[10][2]=0;vaquero [10][3]=0;vaquero[10][4]=0;vaquero [10][5]=0;vaquero [10][6]=0;vaquero [10][7]=0;vaquero [10][8]=0;vaquero [10][9]=0;
+					vaquero [11][0]=0;vaquero [11][1]=0;vaquero [11][2]=0;vaquero [11][3]=0;vaquero [11][4]=0;vaquero [11][5]=0;vaquero [11][6]=0;vaquero [11][7]=0;vaquero [11][8]=0;vaquero [11][9]=0;
+					
+				}
+				if(cursor_y==17){
+					color_jugador=11;
+					forma_jugador=2;
+					vaquero[0][0]=0;vaquero[0][1]=0;vaquero[0][2]=0;vaquero[0][3]=0;vaquero[0][4]=0;vaquero[0][5]=0;vaquero[0][6]=0;vaquero[0][7]=0;vaquero[0][8]=0;vaquero[0][9]=0;
+					vaquero[1][0]=0;vaquero[1][1]=0;vaquero[1][2]=0;vaquero[1][3]=219;vaquero[1][4]=219;vaquero[1][5]=0;vaquero[1][6]=0;vaquero[1][7]=0;vaquero[1][8]=0;vaquero[1][9]=0;
+					vaquero[2][0]=0;vaquero[2][1]=0;vaquero[2][2]=219;vaquero[2][3]=219;vaquero[2][4]=219;vaquero[2][5]=219;vaquero[2][6]=219;vaquero[2][7]=0;vaquero[2][8]=0;vaquero[2][9]=0;
+					vaquero[3][0]=0;vaquero[3][1]=0;vaquero[3][2]=0;vaquero[3][3]=219;vaquero[3][4]=219;vaquero[3][5]=219;vaquero[3][6]=0;vaquero[3][7]=0;vaquero[3][8]=0;vaquero[3][9]=0;
+					vaquero[4][0]=0;vaquero[4][1]=0;vaquero[4][2]=0;vaquero[4][3]=219;vaquero[4][4]=219;vaquero[4][5]=0;vaquero[4][6]=0;vaquero[4][7]=0;vaquero[4][8]=0;vaquero[4][9]=0;
+					vaquero[5][0]=0;vaquero[5][1]=0;vaquero[5][2]=219;vaquero[5][3]=219;vaquero[5][4]=219;vaquero[5][5]=219;vaquero[5][6]=0;vaquero[5][7]=0;vaquero[5][8]=0;vaquero[5][9]=0;
+					vaquero[6][0]=0;vaquero[6][1]=219;vaquero[6][2]=0;vaquero[6][3]=219;vaquero[6][4]=219;vaquero[6][5]=0;vaquero[6][6]=219;vaquero[6][7]=0;vaquero[6][8]=0;vaquero[6][9]=0;
+					vaquero[7][0]=0;vaquero[7][1]=0;vaquero[7][2]=0;vaquero[7][3]=219;vaquero[7][4]=219;vaquero[7][5]=0;vaquero[7][6]=0;vaquero[7][7]=0;vaquero[7][8]=0;vaquero[7][9]=0;
+					vaquero[8][0]=0;vaquero[8][1]=219;vaquero[8][2]=219;vaquero[8][3]=219;vaquero[8][4]=219;vaquero[8][5]=0;vaquero[8][6]=0;vaquero[8][7]=0;vaquero[8][8]=0;vaquero[8][9]=0;
+					vaquero[9][0]=0;vaquero[9][1]=219;vaquero[9][2]=0;vaquero[9][3]=0;vaquero[9][4]=219;vaquero[9][5]=0;vaquero[9][6]=0;vaquero[9][7]=0;vaquero[9][8]=0;vaquero[9][9]=0;
+					vaquero[10][0]=0;vaquero[10][1]=0;vaquero[10][2]=0;vaquero[10][3]=0;vaquero[10][4]=219;vaquero[10][5]=219;vaquero[10][6]=0;vaquero[10][7]=0;vaquero[10][8]=0;vaquero[10][9]=0;
+					vaquero[11][0]=0;vaquero[11][1]=0;vaquero[11][2]=0;vaquero[11][3]=0;vaquero[11][4]=0;vaquero[11][5]=0;vaquero[11][6]=0;vaquero[11][7]=0;vaquero[11][8]=0;vaquero[11][9]=0;
+					
+				}
+				if(cursor_y==19){
+					color_npc=2;
+					forma_npc=1;
+					vaquero1[0][0]=0;vaquero1[0][1]=0;vaquero1[0][2]=0;vaquero1[0][3]=0;vaquero1[0][4]=0;vaquero1[0][5]=0;vaquero1[0][6]=0;vaquero1[0][7]=0;vaquero1[0][8]=0;vaquero1[0][9]=0;
+					vaquero1[1][0]=0;vaquero1[1][1]=0;vaquero1[1][2]=0;vaquero1[1][3]=0;vaquero1[1][4]=0;vaquero1[1][5]=0;vaquero1[1][6]=0;vaquero1[1][7]=0;vaquero1[1][8]=0;vaquero1[1][9]=0;
+					vaquero1[2][0]=0;vaquero1[2][1]=0;vaquero1[2][2]=0;vaquero1[2][3]=0;vaquero1[2][4]=0;vaquero1[2][5]=219;vaquero1[2][6]=219;vaquero1[2][7]=0;vaquero1[2][8]=0;vaquero1[2][9]=0;
+					vaquero1[3][0]=0;vaquero1[3][1]=0;vaquero1[3][2]=0;vaquero1[3][3]=0;vaquero1[3][4]=220;vaquero1[3][5]=219;vaquero1[3][6]=219;vaquero1[3][7]=220;vaquero1[3][8]=0;vaquero1[3][9]=0;
+					vaquero1[4][0]=0;vaquero1[4][1]=0;vaquero1[4][2]=0;vaquero1[4][3]=0;vaquero1[4][4]=0;vaquero1[4][5]=219;vaquero1[4][6]=219;vaquero1[4][7]=0;vaquero1[4][8]=0;vaquero1[4][9]=0;
+					vaquero1[5][0]=0;vaquero1[5][1]=0;vaquero1[5][2]=0;vaquero1[5][3]=0;vaquero1[5][4]=219;vaquero1[5][5]=219;vaquero1[5][6]=219;vaquero1[5][7]=219;vaquero1[5][8]=0;vaquero1[5][9]=0;
+					vaquero1[6][0]=0;vaquero1[6][1]=0;vaquero1[6][2]=0;vaquero1[6][3]=219;vaquero1[6][4]=0;vaquero1[6][5]=219;vaquero1[6][6]=219;vaquero1[6][7]=0;vaquero1[6][8]=219;vaquero1[6][9]=0;
+					vaquero1[7][0]=0;vaquero1[7][1]=0;vaquero1[7][2]=0;vaquero1[7][3]=219;vaquero1[7][4]=0;vaquero1[7][5]=219;vaquero1[7][6]=219;vaquero1[7][7]=0;vaquero1[7][8]=219;vaquero1[7][9]=0;
+					vaquero1[8][0]=0;vaquero1[8][1]=0;vaquero1[8][2]=0;vaquero1[8][3]=0;vaquero1[8][4]=219;vaquero1[8][5]=0;vaquero1[8][6]=0;vaquero1[8][7]=219;vaquero1[8][8]=0;vaquero1[8][9]=0;
+					vaquero1[9][0]=0;vaquero1[9][1]=0;vaquero1[9][2]=0;vaquero1[9][3]=0;vaquero1[9][4]=219;vaquero1[9][5]=0;vaquero1[9][6]=0;vaquero1[9][7]=219;vaquero1[9][8]=0;vaquero1[9][9]=0;
+					vaquero1[10][0]=0;vaquero1[10][1]=0;vaquero1[10][2]=0;vaquero1[10][3]=219;vaquero1[10][4]=219;vaquero1[10][5]=0;vaquero1[10][6]=0;vaquero1[10][7]=219;vaquero1[10][8]=219;vaquero1[10][9]=0;
+					vaquero1[11][0]=0;vaquero1[11][1]=0;vaquero1[11][2]=0;vaquero1[11][3]=0;vaquero1[11][4]=0;vaquero1[11][5]=0;vaquero1[11][6]=0;vaquero1[11][7]=0;vaquero1[11][8]=0;vaquero1[11][9]=0;
+				}
+				if(cursor_y==21){
+					color_npc=14;
+					forma_npc=2;
+					vaquero1[0][0]=0;vaquero1[0][1]=0;vaquero1[0][2]=0;vaquero1[0][3]=0;vaquero1[0][4]=0;vaquero1[0][5]=0;vaquero1[0][6]=0;vaquero1[0][7]=0;vaquero1[0][8]=0;vaquero1[0][9]=0;
+					vaquero1[1][0]=0;vaquero1[1][1]=0;vaquero1[1][2]=0;vaquero1[1][3]=0;vaquero1[1][4]=219;vaquero1[1][5]=219;vaquero1[1][6]=0;vaquero1[1][7]=0;vaquero1[1][8]=0;vaquero1[1][9]=0;
+					vaquero1[2][0]=0;vaquero1[2][1]=0;vaquero1[2][2]=0;vaquero1[2][3]=219;vaquero1[2][4]=219;vaquero1[2][5]=219;vaquero1[2][6]=219;vaquero1[2][7]=0;vaquero1[2][8]=0;vaquero1[2][9]=0;
+					vaquero1[3][0]=0;vaquero1[3][1]=0;vaquero1[3][2]=0;vaquero1[3][3]=0;vaquero1[3][4]=219;vaquero1[3][5]=219;vaquero1[3][6]=0;vaquero1[3][7]=0;vaquero1[3][8]=0;vaquero1[3][9]=0;
+					vaquero1[4][0]=0;vaquero1[4][1]=0;vaquero1[4][2]=219;vaquero1[4][3]=219;vaquero1[4][4]=219;vaquero1[4][5]=219;vaquero1[4][6]=219;vaquero1[4][7]=219;vaquero1[4][8]=0;vaquero1[4][9]=0;
+					vaquero1[5][0]=0;vaquero1[5][1]=219;vaquero1[5][2]=0;vaquero1[5][3]=0;vaquero1[5][4]=219;vaquero1[5][5]=219;vaquero1[5][6]=0;vaquero1[5][7]=0;vaquero1[5][8]=219;vaquero1[5][9]=0;
+					vaquero1[6][0]=0;vaquero1[6][1]=219;vaquero1[6][2]=0;vaquero1[6][3]=0;vaquero1[6][4]=219;vaquero1[6][5]=219;vaquero1[6][6]=0;vaquero1[6][7]=0;vaquero1[6][8]=219;vaquero1[6][9]=0;
+					vaquero1[7][0]=0;vaquero1[7][1]=0;vaquero1[7][2]=219;vaquero1[7][3]=0;vaquero1[7][4]=219;vaquero1[7][5]=219;vaquero1[7][6]=0;vaquero1[7][7]=219;vaquero1[7][8]=0;vaquero1[7][9]=0;
+					vaquero1[8][0]=0;vaquero1[8][1]=0;vaquero1[8][2]=0;vaquero1[8][3]=219;vaquero1[8][4]=219;vaquero1[8][5]=219;vaquero1[8][6]=219;vaquero1[8][7]=0;vaquero1[8][8]=0;vaquero1[8][9]=0;
+					vaquero1[9][0]=0;vaquero1[9][1]=0;vaquero1[9][2]=0;vaquero1[9][3]=219;vaquero1[9][4]=0;vaquero1[9][5]=0;vaquero1[9][6]=219;vaquero1[9][7]=0;vaquero1[9][8]=0;vaquero1[9][9]=0;
+					vaquero1[10][0]=0;vaquero1[10][1]=0;vaquero1[10][2]=219;vaquero1[10][3]=219;vaquero1[10][4]=0;vaquero1[10][5]=219;vaquero1[10][6]=219;vaquero1[10][7]=0;vaquero1[10][8]=0;vaquero1[10][9]=0;
+					vaquero1[11][0]=0;vaquero1[11][1]=0;vaquero1[11][2]=0;vaquero1[11][3]=0;vaquero1[11][4]=0;vaquero1[11][5]=0;vaquero1[11][6]=0;vaquero1[11][7]=0;vaquero1[11][8]=0;vaquero1[11][9]=0;
+					
+				}
+				break;
+				
+			case 32:
+				activar=true;
+				game_over=false;
+				clrscr();//limpiar la pantalla
+				break;
+			}
+			
+		}
+		
+	}
+	
+	
+}
+
+
